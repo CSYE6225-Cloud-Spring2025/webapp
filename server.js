@@ -13,10 +13,11 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use("/", healthCheckRoutes);
 
+const port = process.env.PORT || 3000;
 sequelize.sync().then(() => {
     console.log("Database sync successful");
-    app.listen(8080, () => {
-      console.log("Server started on http://localhost:8080");
+    app.listen(port, () => {
+      console.log("Server started on http://localhost:"+port);
     });
   }).catch((error) => {
     console.error("Database sync failed: ", error);
