@@ -27,8 +27,8 @@ cd /opt/csye6225/webapp || exit
 npm install
 
 # create group and new user
-groupadd demogroup
-useradd -m -g demogroup -s /bin/bash demouser
+groupadd "$APP_GROUP"
+useradd -m -g "$APP_GROUP" -s /bin/bash "$APP_USER"
 
 # provide permissions to the user and group
 chown -R "$APP_USER":"$APP_GROUP" /opt/csye6225
