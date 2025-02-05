@@ -6,7 +6,7 @@ const app = express();
 app.use((req, res, next) => {
   res.setHeader("Cache-Control", "no-cache");
   if (req.method != "GET") {
-    res.sendStatus(405);
+    res.status(405).end()
   }
   next();
 });
