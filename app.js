@@ -19,4 +19,4 @@ sequelize.sync().then(() => {
     console.error("Database sync failed: ", error);
   });
 
-module.exports = app;
+module.exports = {app, sequelize};
