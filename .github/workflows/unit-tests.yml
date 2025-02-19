@@ -19,6 +19,7 @@ jobs:
           MYSQL_DATABASE: ${{vars.DB_NAME}}
         ports:
           - ${{vars.PORT}}:${{vars.PORT}}
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,7 +32,7 @@ jobs:
       - name: Install node modules
         run: npm install
 
-      - name: Set environment variables and run test
+      - name: Run test using environment variables
         env:
           DB_HOST: ${{vars.DB_HOST}}
           DB_USER: ${{secrets.DB_USER}}
