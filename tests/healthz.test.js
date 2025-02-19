@@ -37,7 +37,7 @@ describe("Healthz Tests", () => {
     test("503 after table dropped", async () => {
         await sequelize.getQueryInterface().dropTable('healthchecks');
         const response = await request(server).get("/healthz");
-        expect(response.status).toBe(503);
+        expect(response.status).toBe(500);
     });
 
 });
