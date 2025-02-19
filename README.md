@@ -11,4 +11,4 @@
 3. scp `.env`, `webapp.zip`, and `script.sh` to server using `scp -i ~/.ssh/digital-ocean-key .env. webapp.zip install.sh root@<host-ip>:/opt`
 4. ssh into the server using `ssh -i ~/.ssh/digital-ocean-key root@<host-ip>`
 5. Give executable permsiion to the root user using `chmod +x /opt/install.sh` and run `/opt/install.sh`
-6. `su - demouser` to change into the created user for testing
+6. `su - <demouser>` to change into the created user for testing

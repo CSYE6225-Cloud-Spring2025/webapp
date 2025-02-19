@@ -10,7 +10,7 @@ apt-get upgrade -y
 apt install mysql-server -y
 
 # create password for root user and create webapp database
-mysql -e "ALTER USER '$DB_USER'@'$DB_HOST' IDENTIFIED WITH mysql_native_password BY '$DB_PASSWORD'; FLUSH PRIVILEGES";
+mysql -e "ALTER USER '$DB_USER'@'$DB_HOST' IDENTIFIED WITH mysql_native_password BY '$DB_PASSWORD'; FLUSH PRIVILEGES;"
 mysql -u root -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 
 # install Node.js and npm packages
