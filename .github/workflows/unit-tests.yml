@@ -32,6 +32,15 @@ jobs:
       - name: Install node modules
         run: npm install
 
+      - name: Wait for MySQL server to start
+        run: |
+          while ! mysqladmin ping -h ${{vars.DB_HOST}} -u ${{secrets.DB_USER}} -p${{secrets.DB_PASSWORD}};
+          do
+            echo "Waiting for MySQL server start..."
+            sleep 3
+          done
+          echo "MySQL server started"
+
       - name: Run test using environment variables
         env:
           DB_HOST: ${{vars.DB_HOST}}
