@@ -12,3 +12,4 @@
 4. ssh into the server using `ssh -i ~/.ssh/digital-ocean-key root@<host-ip>`
 5. Give executable permsiion to the root user using `chmod +x /opt/install.sh` and run `/opt/install.sh`
 6. `su - <demouser>` to change into the created user for testing
+7. Test
