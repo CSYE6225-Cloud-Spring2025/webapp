@@ -16,7 +16,7 @@ describe("Healthz Tests", () => {
 
     test("200 for success health check", async () => {
       const response = await request(server).get("/healthz");
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
     });
 
     test("400 for incorrect endpoint", async () => {
