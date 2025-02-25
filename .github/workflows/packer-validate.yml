@@ -1,0 +1,28 @@
+name: Packer validation
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  packer-validate:
+    name: Packer formatting and validation check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install packer
+        uses: hashicorp/setup-packer@v2
+
+      - name: Initialize packer
+        run: packer init ./packer
+
+      - name: Check formatting
+        run:  packer fmt -check -recursive ./packer
+        
+      - name: cd into packer folder and validate
+        run: |
+          cd packer
+          packer validate .
