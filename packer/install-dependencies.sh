@@ -15,3 +15,5 @@ sudo mysql -u root -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 # install Node.js and npm packages
 sudo apt install nodejs -y
 sudo apt install npm -y
+
+sudo mkdir /opt/csye6225

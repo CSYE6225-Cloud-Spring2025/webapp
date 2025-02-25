@@ -3,7 +3,6 @@ Description=CSYE 6225 App
 After=network.target
 
 [Service]
-Environment=PORT=3001
 Type=simple
 User=csye6225
 Group=csye6225

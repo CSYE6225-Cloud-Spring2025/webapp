@@ -10,4 +10,5 @@ sudo cp /tmp/webapp.service /etc/systemd/system/webapp.service
 
 # configure run on system boot
 sudo systemctl daemon-reload
-sudo systemtl enable webapp
+sudo systemctl enable webapp
+sudo systemctl start webapp
