@@ -19,12 +19,3 @@ sudo mysql -u root -p"$DB_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 # install Node.js and npm packages
 sudo apt install nodejs -y
 sudo apt install npm -y
-
-# copy the source code into opt/csye6225
-sudo mkdir -p /opt/csye6225/webapp
-sudo cp -r /tmp/webapp/* /opt/csye6225/webapp/
-if [ $? -eq 0 ]; then
-  echo "Copy successful"
-else
-  echo "Copy failed"
-fi
