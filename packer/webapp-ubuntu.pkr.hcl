@@ -39,9 +39,11 @@ build {
     script = "update-os.sh"
   }
 
-  provisioner "file" {
-    source      = "./"
-    destination = "/tmp/webapp"
+  provisioner "shell" {
+    inline = [
+      "sudo mkdir -p /opt/csye6225/webapp",
+      "sudo cp -r ./webapp/* /opt/csye6225/webapp/"
+    ]
   }
 
   provisioner "shell" {
