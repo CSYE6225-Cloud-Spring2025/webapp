@@ -52,4 +52,4 @@ jobs:
           APP_USER: ${{vars.APP_USER}}
         run: |
           cd packer
-          packer build webapp-ubuntu.pkr.hcl
+          packer build .
