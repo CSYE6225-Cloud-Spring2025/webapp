@@ -16,7 +16,7 @@ source "amazon-ebs" "webapp-ubuntu" {
   source_ami      = var.aws_source_ami
   ssh_username    = "ubuntu"
   subnet_id       = var.aws_subnet_id
-  ami_users = [var.aws_demo_account]
+  ami_users       = [var.aws_demo_account]
 
   aws_polling {
     delay_seconds = 120

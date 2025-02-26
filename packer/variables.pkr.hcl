@@ -29,9 +29,9 @@ variable "aws_subnet_id" {
 }
 
 variable "aws_demo_account" {
-  type = string
+  type        = string
   description = "AWS demo account ID"
-  default = "demo-account-id"
+  default     = "demo-account-id"
 }
 
 variable "DB_USER" {
