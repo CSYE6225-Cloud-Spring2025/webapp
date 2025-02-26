@@ -15,14 +15,14 @@ jobs:
 
     steps:
 
-      - name: Make all scripts executable
-        run: chmod +x packer/*.sh
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install packer
         uses: hashicorp/setup-packer@v2
+
+      - name: Make all scripts executable
+        run: chmod +x packer/*.sh
 
       - name: Initialize packer
         run: packer init ./packer
