@@ -5,9 +5,6 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 export CHECKPOINT_DISABLE=1
 
-# copy the source code into opt
-sudo cp -r /tmp/webapp /opt/csye6225/
-
 # create environment variable file
 {
   echo "DB_HOST=${DB_HOST}"
