@@ -6,7 +6,6 @@ export DEBIAN_FRONTEND=noninteractive
 export CHECKPOINT_DISABLE=1
 
 # create environment variable file
-cd /opt/csye6225/webapp || exit
 {
   echo "DB_HOST=${DB_HOST}"
   echo "DB_USER=${DB_USER}"
@@ -16,4 +15,5 @@ cd /opt/csye6225/webapp || exit
 } > "/opt/csye6225/webapp/.env"
 
 # install node modules
+cd /opt/csye6225/webapp || exit
 sudo npm install
