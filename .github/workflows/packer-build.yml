@@ -42,7 +42,8 @@ jobs:
           aws_instance_type: ${{vars.AWS_INSTANCE_TYPE}}
           aws_source_ami: ${{secrets.AWS_SOURCE_AMI}}
           ssh_username: ${{vars.SSH_USERNAME}}
-          subnet_id: ${{secrets.SUBNET_ID}}
+          aws_subnet_id: ${{secrets.AWS_SUBNET_ID}}
+          aws_demo_account: ${{secrets.AWS_DEMO_ACCOUNT}}
           DB_HOST: ${{vars.DB_HOST}}
           DB_USER: ${{secrets.DB_USER}}
           DB_PASSWORD: ${{secrets.DB_PASSWORD}}
