@@ -9,7 +9,7 @@ packer {
 
 # AWS AMI build
 source "amazon-ebs" "webapp-ubuntu" {
-  ami_name        = "webapp_packer_linux${formatdate("YYYY_MM_DD", timestamp())}"
+  ami_name        = "webapp_packer_linux${formatdate("YYYY-MM-DD_HH-mm", timestamp())}"
   ami_description = "AMI for Assignment 4"
   instance_type   = var.aws_instance_type
   region          = var.aws_region
