@@ -1,9 +1,3 @@
-variable "profile" {
-  type        = string
-  description = "AWS profile name"
-  default     = "dev"
-}
-
 variable "aws_region" {
   type        = string
   description = "AWS region"
