@@ -16,7 +16,7 @@ jobs:
     steps:
 
       - name: Make all scripts executable
-        run: chmod +x ./packer/*.sh
+        run: chmod +x packer/*.sh
 
       - name: Checkout repository
         uses: actions/checkout@v4
