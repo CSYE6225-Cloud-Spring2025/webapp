@@ -39,6 +39,11 @@ build {
     script = "update-os.sh"
   }
 
+  provisioner "file" {
+    source      = "./"
+    destination = "/tmp/webapp"
+  }
+
   provisioner "shell" {
     script = "install-dependencies.sh"
     environment_vars = [
@@ -47,11 +52,6 @@ build {
       "DB_PASSWORD=${var.DB_PASSWORD}",
       "DB_NAME=${var.DB_NAME}"
     ]
-  }
-
-  provisioner "file" {
-    source      = "./"
-    destination = "/tmp/webapp"
   }
 
   provisioner "shell" {
