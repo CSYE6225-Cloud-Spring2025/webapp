@@ -13,7 +13,7 @@ variable "aws_instance_type" {
 variable "aws_source_ami" {
   type        = string
   description = "AWS Ubuntu source"
-  default     = "ami-04b4f1a9cf54c11d0"
+  default     = "ami-id"
 }
 
 variable "ssh_username" {
@@ -22,10 +22,16 @@ variable "ssh_username" {
   default     = "ubuntu"
 }
 
-variable "subnet_id" {
+variable "aws_subnet_id" {
   type        = string
-  description = "Subnet id in default VPC"
-  default     = "subnet-04fe1d51bca2972a6"
+  description = "AWS Subnet id in default VPC"
+  default     = "subnet-id"
+}
+
+variable "aws_demo_account" {
+  type = string
+  description = "AWS demo account ID"
+  default = "demo-account-id"
 }
 
 variable "DB_USER" {
