@@ -1,9 +1,3 @@
-variable "profile" {
-  type        = string
-  description = "AWS profile name"
-  default     = "dev"
-}
-
 variable "aws_region" {
   type        = string
   description = "AWS region"
@@ -36,14 +30,14 @@ variable "subnet_id" {
 
 variable "DB_USER" {
   type        = string
-  description = "DB user"
+  description = "Database user"
   default     = "root"
 }
 
 variable "DB_HOST" {
   type        = string
-  description = "Database user"
-  default     = "127.0.0.1"
+  description = "Database host"
+  default     = "localhost"
 }
 
 variable "DB_PASSWORD" {

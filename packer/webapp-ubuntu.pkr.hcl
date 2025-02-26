@@ -35,8 +35,14 @@ build {
   sources = [
     "source.amazon-ebs.webapp-ubuntu"
   ]
+
   provisioner "shell" {
     script = "update-os.sh"
+  }
+
+  provisioner "file" {
+    source      = "../"
+    destination = "/tmp/webapp/"
   }
 
   provisioner "shell" {
@@ -47,11 +53,6 @@ build {
       "DB_PASSWORD=${var.DB_PASSWORD}",
       "DB_NAME=${var.DB_NAME}"
     ]
-  }
-
-  provisioner "file" {
-    source      = "./"
-    destination = "/opt/csye6225/webapp"
   }
 
   provisioner "shell" {

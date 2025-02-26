@@ -1,0 +1,55 @@
+name: Packer build and create machine image
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PACKER_LOG: "1"
+
+jobs:
+  build-machine-image:
+    name: packer build and create machine image
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install packer
+        uses: hashicorp/setup-packer@v2
+
+      - name: Make all scripts executable
+        run: chmod +x packer/*.sh
+
+      - name: Initialize packer
+        run: packer init ./packer
+
+      - name: Configure AWS key and password
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{secrets.AWS_KEY}}
+          aws-secret-access-key: ${{secrets.AWS_PASSWORD}}
+          aws-region: ${{vars.aws_region}}
+
+      - name: Build machine image
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_KEY}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_PASSWORD}}
+          aws_region: ${{vars.AWS_REGION}}
+          aws_instance_type: ${{vars.AWS_INSTANCE_TYPE}}
+          aws_source_ami: ${{secrets.AWS_SOURCE_AMI}}
+          ssh_username: ${{vars.SSH_USERNAME}}
+          subnet_id: ${{secrets.SUBNET_ID}}
+          DB_HOST: ${{vars.DB_HOST}}
+          DB_USER: ${{secrets.DB_USER}}
+          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+          DB_NAME: ${{vars.DB_NAME}}
+          PORT: ${{vars.PORT}}
+          APP_GROUP: ${{vars.APP_GROUP}}
+          APP_USER: ${{vars.APP_USER}}
+        run: |
+          cd packer
+          packer build .

@@ -5,8 +5,14 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 export CHECKPOINT_DISABLE=1
 
+# copy from /tmp/opt/webapp to /opt/csye6225/webapp
+sudo mkdir -p /opt/csye6225/webapp
+sudo chmod -R 755 /opt/csye6225/webapp
+sudo cp -R /tmp/webapp/* /opt/csye6225/webapp/
+
 # create environment variable file
-cd /opt/csye6225/webapp || exit
+sudo touch /opt/csye6225/webapp/.env
+sudo chmod 666 /opt/csye6225/webapp/.env
 {
   echo "DB_HOST=${DB_HOST}"
   echo "DB_USER=${DB_USER}"
@@ -16,4 +22,5 @@ cd /opt/csye6225/webapp || exit
 } > "/opt/csye6225/webapp/.env"
 
 # install node modules
+cd /opt/csye6225/webapp || exit
 sudo npm install
