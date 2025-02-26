@@ -5,8 +5,12 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 export CHECKPOINT_DISABLE=1
 
+echo "Contents of /tmp/webapp before copy"
+ls -la /tmp/webapp
 sudo mkdir -p /opt/csye6225/webapp
 sudo cp -R /tmp/webapp/* /opt/csye6225/webapp/
+echo "Contents of opt/csye6225/webapp after copy"
+ls -la /opt/csye6225/webapp
 
 # create environment variable file
 {
