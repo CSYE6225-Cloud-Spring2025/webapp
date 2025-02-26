@@ -21,5 +21,10 @@ sudo apt install nodejs -y
 sudo apt install npm -y
 
 # copy the source code into opt/csye6225
-sudo mkdir /opt/csye6225
-sudo cp -r /tmp/webapp /opt/csye6225/
+sudo mkdir -p /opt/csye6225/webapp
+sudo cp -r /tmp/webapp/* /opt/csye6225/webapp/
+if [ $? -eq 0 ]; then
+  echo "Copy successful"
+else
+  echo "Copy failed"
+fi
