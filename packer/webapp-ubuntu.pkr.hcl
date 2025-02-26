@@ -51,7 +51,7 @@ build {
 
   provisioner "file" {
     source      = "./"
-    destination = "/opt/csye6225/webapp"
+    destination = "/tmp/webapp"
   }
 
   provisioner "shell" {

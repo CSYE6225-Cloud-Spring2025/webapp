@@ -33,6 +33,3 @@ useradd -m -g "$APP_GROUP" -s /bin/bash "$APP_USER"
 # provide permissions to the user and group
 chown -R "$APP_USER":"$APP_GROUP" /opt/csye6225
 chmod -R 750 /opt/csye6225
-
-# move the environment variables file to webapp
-mv /opt/.env /opt/csye6225/webapp
