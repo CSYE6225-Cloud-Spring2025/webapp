@@ -35,15 +35,14 @@ build {
   sources = [
     "source.amazon-ebs.webapp-ubuntu"
   ]
+
   provisioner "shell" {
     script = "update-os.sh"
   }
 
-  provisioner "shell" {
-    inline = [
-      "sudo mkdir -p /opt/csye6225/webapp",
-      "sudo cp -r ./webapp/* /opt/csye6225/webapp/"
-    ]
+  provisioner "file" {
+    source = "./"
+    destination = "/tmp/webapp" 
   }
 
   provisioner "shell" {
