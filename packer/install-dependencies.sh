@@ -6,7 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
 export CHECKPOINT_DISABLE=1
 
 # install and start the MySQL database server
-sudo apt install mysql-server -y
+sudo apt-get install mysql-server -y
 
 # start mysql server
 sudo systemctl enable mysql
