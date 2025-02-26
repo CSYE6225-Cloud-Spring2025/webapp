@@ -35,22 +35,22 @@ jobs:
           aws-region: ${{vars.aws_region}}
 
       - name: Build machine image
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_KEY}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_PASSWORD}}
-          aws_region: ${{vars.AWS_REGION}}
-          aws_instance_type: ${{vars.AWS_INSTANCE_TYPE}}
-          aws_source_ami: ${{secrets.AWS_SOURCE_AMI}}
-          ssh_username: ${{vars.SSH_USERNAME}}
-          aws_subnet_id: ${{secrets.AWS_SUBNET_ID}}
-          aws_demo_account: ${{secrets.AWS_DEMO_ACCOUNT}}
-          DB_HOST: ${{vars.DB_HOST}}
-          DB_USER: ${{secrets.DB_USER}}
-          DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-          DB_NAME: ${{vars.DB_NAME}}
-          PORT: ${{vars.PORT}}
-          APP_GROUP: ${{vars.APP_GROUP}}
-          APP_USER: ${{vars.APP_USER}}
         run: |
           cd packer
-          packer build .
+          packer build \
+            -var "AWS_ACCESS_KEY_ID=${{secrets.AWS_KEY}}" \
+            -var "AWS_SECRET_ACCESS_KEY=${{secrets.AWS_PASSWORD}}" \
+            -var "aws_region=${{vars.AWS_REGION}}" \
+            -var "aws_instance_type=${{vars.AWS_INSTANCE_TYPE}}" \
+            -var "aws_source_ami=${{secrets.AWS_SOURCE_AMI}}" \
+            -var "ssh_username=${{vars.SSH_USERNAME}}" \
+            -var "aws_subnet_id=${{secrets.AWS_SUBNET_ID}}" \
+            -var "aws_demo_account=${{secrets.AWS_DEMO_ACCOUNT}}" \
+            -var "DB_HOST=${{vars.DB_HOST}}" \
+            -var "DB_USER=${{secrets.DB_USER}}" \
+            -var "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
+            -var "DB_NAME=${{vars.DB_NAME}}" \
+            -var "PORT=${{vars.PORT}}" \
+            -var "APP_GROUP=${{vars.APP_GROUP}}" \
+            -var "APP_USER=${{vars.APP_USER}}" \
+          .
