@@ -42,7 +42,8 @@ source "googlecompute" "webapp-ubuntu" {
   project_id          = var.gcp_project_id
   machine_type        = var.gcp_machine_type
   zone                = var.gcp_zone
-  source_image_family = var.gcp_image_family
+  source_image        = var.gcp_image_family
+  source_image_family = null
   image_project_id    = var.gcp_image_project
   ssh_username        = var.ssh_username
   disk_size           = 8
