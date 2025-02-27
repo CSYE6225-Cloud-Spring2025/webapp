@@ -94,12 +94,6 @@ variable "gcp_image_family" {
   default     = "ubuntu-2404-lts"
 }
 
-variable "gcp_image_project" {
-  type        = string
-  description = "GCP Ubuntu image project"
-  default     = "ubuntu-os-cloud"
-}
-
 variable "gcp_machine_type" {
   type    = string
   default = "e2-small"

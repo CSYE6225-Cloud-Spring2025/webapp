@@ -55,7 +55,6 @@ jobs:
             -var "gcp_project_id=${{secrets.GCP_PROJECT_ID}}" \
             -var "gcp_zone=${{vars.GCP_ZONE}}" \
             -var "gcp_image_family=${{vars.GCP_IMAGE_FAMILY}}" \
-            -var "gcp_image_project=${{vars.GCP_IMAGE_PROJECT}}" \
             -var "gcp_machine_type=${{vars.GCP_MACHINE_TYPE}}" \
             -var "DB_HOST=${{vars.DB_HOST}}" \
             -var "DB_USER=${{secrets.DB_USER}}" \
