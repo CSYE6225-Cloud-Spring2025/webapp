@@ -88,10 +88,16 @@ variable "gcp_zone" {
   default     = "us-east4-a"
 }
 
-variable "gcp_source_image" {
+variable "gcp_image_family" {
   type        = string
-  description = "GCP Ubuntu source"
-  default     = "gcp-source-image"
+  description = "GCP Ubuntu image family"
+  default     = "ubuntu-2404-lts"
+}
+
+variable "gcp_image_project" {
+  type        = string
+  description = "GCP Ubuntu image project"
+  default     = "ubuntu-os-cloud"
 }
 
 variable "gcp_machine_type" {
