@@ -1,7 +1,7 @@
 name: Packer build and create machine image
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 

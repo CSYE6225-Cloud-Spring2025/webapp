@@ -13,7 +13,7 @@ packer {
 
 locals {
   timestamp  = formatdate("YYYYMMDD-hhmm", timestamp())
-  image_name = "gcp-webapp-packer-linux-${local.timestamp}"
+  image_name = "webapp-packer-linux-${local.timestamp}"
 }
 
 # AWS AMI build
