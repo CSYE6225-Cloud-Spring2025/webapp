@@ -104,3 +104,9 @@ variable "gcp_machine_type" {
   type    = string
   default = "e2-small"
 }
+
+variable "gcp_demo_account" {
+  type        = string
+  description = "GCP demo account ID"
+  default     = "gcp-demo"
+}

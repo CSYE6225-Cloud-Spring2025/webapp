@@ -11,9 +11,14 @@ packer {
   }
 }
 
+locals {
+  timestamp  = formatdate("YYYYMMDD-hhmm", timestamp())
+  image_name = "webapp-packer-linux-${local.timestamp}"
+}
+
 # AWS AMI build
 source "amazon-ebs" "webapp-ubuntu" {
-  ami_name        = "webapp_packer_linux${formatdate("YYYY-MM-DD_HH-mm", timestamp())}"
+  ami_name        = local.image_name
   ami_description = "AMI for Assignment 4"
   instance_type   = var.aws_instance_type
   region          = var.aws_region
@@ -37,7 +42,7 @@ source "amazon-ebs" "webapp-ubuntu" {
 
 # GCP image build
 source "googlecompute" "webapp-ubuntu" {
-  image_name              = "webapp-packer-linux${formatdate("YYYY-MM-DD-HH-mm", timestamp())}"
+  image_name              = local.image_name
   image_description       = "GCP image for Assignment 4"
   project_id              = var.gcp_project_id
   machine_type            = var.gcp_machine_type
@@ -101,5 +106,11 @@ build {
 
   provisioner "shell" {
     script = "setup-app.sh"
+  }
+
+  post-processor "shell-local" {
+    inline = [
+      "gcloud compute images add-iam-policy-binding ${local.image_name} --project=${var.gcp_project_id} --member='projectEditor:${var.gcp_demo_account}' --role='roles/compute.imageUser'"
+    ]
   }
 }

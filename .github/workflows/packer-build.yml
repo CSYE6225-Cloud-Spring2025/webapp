@@ -57,6 +57,7 @@ jobs:
             -var "gcp_image=${{vars.GCP_IMAGE}}" \
             -var "gcp_image_project=${{vars.GCP_IMAGE_PROJECT}}" \
             -var "gcp_machine_type=${{vars.GCP_MACHINE_TYPE}}" \
+            -var "gcp_demo_account=${{secrets.GCP_DEMO_ACCOUNT}}" \
             -var "DB_HOST=${{vars.DB_HOST}}" \
             -var "DB_USER=${{secrets.DB_USER}}" \
             -var "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
