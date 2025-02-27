@@ -37,18 +37,17 @@ source "amazon-ebs" "webapp-ubuntu" {
 
 # GCP image build
 source "googlecompute" "webapp-ubuntu" {
-  image_name          = "webapp-packer-linux${formatdate("YYYY-MM-DD-HH-mm", timestamp())}"
-  image_description   = "GCP image for Assignment 4"
-  project_id          = var.gcp_project_id
-  machine_type        = var.gcp_machine_type
-  zone                = var.gcp_zone
-  source_image        = var.gcp_image_family
-  source_image_family = null
-  image_project_id    = var.gcp_image_project
-  ssh_username        = var.ssh_username
-  disk_size           = 8
-  disk_type           = "pd-ssd"
-  on_host_maintenance = "TERMINATE"
+  image_name              = "webapp-packer-linux${formatdate("YYYY-MM-DD-HH-mm", timestamp())}"
+  image_description       = "GCP image for Assignment 4"
+  project_id              = var.gcp_project_id
+  machine_type            = var.gcp_machine_type
+  zone                    = var.gcp_zone
+  source_image            = var.gcp_image
+  source_image_project_id = [var.gcp_image_project]
+  ssh_username            = var.ssh_username
+  disk_size               = 8
+  disk_type               = "pd-ssd"
+  on_host_maintenance     = "TERMINATE"
 }
 
 build {

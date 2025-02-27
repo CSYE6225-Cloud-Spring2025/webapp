@@ -88,10 +88,10 @@ variable "gcp_zone" {
   default     = "us-east4-a"
 }
 
-variable "gcp_image_family" {
+variable "gcp_image" {
   type        = string
   description = "GCP Ubuntu image family"
-  default     = "ubuntu-2404-lts"
+  default     = "ubuntu-2404-noble-amd64-v20250214"
 }
 
 variable "gcp_image_project" {
