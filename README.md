@@ -12,3 +12,11 @@
 4. ssh into the server using `ssh -i ~/.ssh/digital-ocean-key root@<host-ip>`
 5. Give executable permsiion to the root user using `chmod +x /opt/install.sh` and run `/opt/install.sh`
 6. `su - <demouser>` to change into the created user for testing
+
+## Assignment 4
+1. Configure all secrets and variables and GitHub as seen in packer-builder.yml
+2. Merge PR to trigger AWS and GCP machine image builds
+3. For `GCP` setup the Firewall policy to allow traffic on application port and create a <network-tag>
+4. Start instance creation and select the custom image shared from the dev account
+5. Configure the <network-tag> in the instance's target tag
+6. Finally create the instance and get its public ipv4 address to send requests
