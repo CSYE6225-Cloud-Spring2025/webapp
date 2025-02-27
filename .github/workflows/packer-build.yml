@@ -1,7 +1,7 @@
 name: Packer build and create machine image
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -34,6 +34,14 @@ jobs:
           aws-secret-access-key: ${{secrets.AWS_PASSWORD}}
           aws-region: ${{vars.aws_region}}
 
+      - name: Configure GCP credentials
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{secrets.GCP_KEY}}
+
+      - name: Install GCP SDK
+        uses: google-github-actions/setup-gcloud@v2
+
       - name: Build machine image
         run: |
           cd packer
@@ -44,6 +52,10 @@ jobs:
             -var "ssh_username=${{vars.SSH_USERNAME}}" \
             -var "aws_subnet_id=${{secrets.AWS_SUBNET_ID}}" \
             -var "aws_demo_account=${{secrets.AWS_DEMO_ACCOUNT}}" \
+            -var "gcp_project_id=${{secrets.GCP_PROJECT_ID}}" \
+            -var "gcp_zone=${{vars.GCP_ZONE}}" \
+            -var "gcp_source_image=${{secrets.GCP_SOURCE_IMAGE}}" \
+            -var "gcp_machine_type=${{vars.GCP_MACHINE_TYPE}}" \
             -var "DB_HOST=${{vars.DB_HOST}}" \
             -var "DB_USER=${{secrets.DB_USER}}" \
             -var "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \

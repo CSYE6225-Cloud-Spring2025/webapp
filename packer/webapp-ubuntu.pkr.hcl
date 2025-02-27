@@ -4,6 +4,10 @@ packer {
       source  = "github.com/hashicorp/amazon"
       version = "> 1.0.0, <2.0.0"
     }
+    googlecompute = {
+      source  = "github.com/hashicorp/googlecompute"
+      version = "> 1.0.0, <2.0.0"
+    }
   }
 }
 
@@ -14,7 +18,7 @@ source "amazon-ebs" "webapp-ubuntu" {
   instance_type   = var.aws_instance_type
   region          = var.aws_region
   source_ami      = var.aws_source_ami
-  ssh_username    = "ubuntu"
+  ssh_username    = var.ssh_username
   subnet_id       = var.aws_subnet_id
   ami_users       = [var.aws_demo_account]
 
@@ -31,10 +35,25 @@ source "amazon-ebs" "webapp-ubuntu" {
   }
 }
 
+# GCP image build
+source "googlecompute" "webapp-ubuntu" {
+  image_name          = "webapp-packer-linux${formatdate("YYYY-MM-DD-HH-mm", timestamp())}"
+  image_description   = "GCP image for Assignment 4"
+  project_id          = var.gcp_project_id
+  machine_type        = var.gcp_machine_type
+  zone                = var.gcp_zone
+  source_image        = var.gcp_source_image
+  ssh_username        = var.ssh_username
+  disk_size           = 8
+  disk_type           = "pd-ssd"
+  on_host_maintenance = "TERMINATE"
+}
+
 build {
   name = "webapp-packer"
   sources = [
-    "source.amazon-ebs.webapp-ubuntu"
+    "source.amazon-ebs.webapp-ubuntu",
+    "source.googlecompute.webapp-ubuntu"
   ]
 
   provisioner "shell" {

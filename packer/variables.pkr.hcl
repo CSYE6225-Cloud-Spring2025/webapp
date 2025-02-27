@@ -13,7 +13,7 @@ variable "aws_instance_type" {
 variable "aws_source_ami" {
   type        = string
   description = "AWS Ubuntu source"
-  default     = "ami-id"
+  default     = "aws-source-ami"
 }
 
 variable "ssh_username" {
@@ -25,13 +25,13 @@ variable "ssh_username" {
 variable "aws_subnet_id" {
   type        = string
   description = "AWS Subnet id in default VPC"
-  default     = "subnet-id"
+  default     = ""
 }
 
 variable "aws_demo_account" {
   type        = string
   description = "AWS demo account ID"
-  default     = "demo-account-id"
+  default     = ""
 }
 
 variable "DB_USER" {
@@ -74,4 +74,27 @@ variable "APP_USER" {
   type        = string
   description = "Application user"
   default     = "csye6225"
+}
+
+variable "gcp_project_id" {
+  type        = string
+  description = "GCP project ID"
+  default     = "gcp-project-id"
+}
+
+variable "gcp_zone" {
+  type        = string
+  description = "GCP zone"
+  default     = "us-east4-a"
+}
+
+variable "gcp_source_image" {
+  type        = string
+  description = "GCP Ubuntu source"
+  default     = "gcp-source-image"
+}
+
+variable "gcp_machine_type" {
+  type    = string
+  default = "e2-small"
 }
