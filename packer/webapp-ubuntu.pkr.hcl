@@ -13,7 +13,7 @@ packer {
 
 locals {
   timestamp  = formatdate("YYYYMMDD-hhmm", timestamp())
-  image_name = "webapp-packer-linux-${local.timestamp}"
+  image_name = "gcp-webapp-packer-linux-${local.timestamp}"
 }
 
 # AWS AMI build
@@ -109,8 +109,9 @@ build {
   }
 
   post-processor "shell-local" {
+    only = ["source.googlecompute.webapp-ubuntu"]
     inline = [
-      "gcloud compute images add-iam-policy-binding ${local.image_name} --project=${var.gcp_project_id} --member='projectEditor:${var.gcp_demo_account}' --role='roles/compute.imageUser'"
+      "gcloud compute images add-iam-policy-binding ${local.image_name} --project=${var.gcp_project_id} --member='project:${var.gcp_demo_account}' --role='roles/compute.imageUser'"
     ]
   }
 }
