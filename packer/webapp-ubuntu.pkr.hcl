@@ -47,7 +47,6 @@ source "googlecompute" "webapp-ubuntu" {
   ssh_username            = var.ssh_username
   disk_size               = 10
   disk_type               = "pd-ssd"
-  on_host_maintenance     = "TERMINATE"
 }
 
 build {
