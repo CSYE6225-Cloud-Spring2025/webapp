@@ -45,7 +45,7 @@ source "googlecompute" "webapp-ubuntu" {
   source_image            = var.gcp_image
   source_image_project_id = [var.gcp_image_project]
   ssh_username            = var.ssh_username
-  disk_size               = 8
+  disk_size               = 10
   disk_type               = "pd-ssd"
   on_host_maintenance     = "TERMINATE"
 }

@@ -90,7 +90,7 @@ variable "gcp_zone" {
 
 variable "gcp_image" {
   type        = string
-  description = "GCP Ubuntu image family"
+  description = "GCP Ubuntu image"
   default     = "ubuntu-2404-noble-amd64-v20250214"
 }
 
