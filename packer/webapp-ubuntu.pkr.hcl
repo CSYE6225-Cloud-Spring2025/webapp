@@ -1,5 +1,5 @@
 packer {
-  required_plugin {
+  required_plugins {
     amazon = {
       source  = "github.com/hashicorp/amazon"
       version = "> 1.0.0, <2.0.0"
@@ -18,7 +18,7 @@ locals {
 
 # AWS AMI build
 source "amazon-ebs" "webapp-ubuntu" {
-  ami_name        = local.image_name
+  ami_name        = local.image_names
   ami_description = "AMI for Assignment 4"
   instance_type   = var.aws_instance_type
   region          = var.aws_region
