@@ -20,3 +20,5 @@
 4. Start instance creation and select the custom image shared from the dev account
 5. Configure the <network-tag> in the instance's target tag
 6. Finally create the instance and get its public ipv4 address to send requests
+
+## Assignment 5
