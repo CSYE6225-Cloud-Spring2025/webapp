@@ -44,7 +44,6 @@ jobs:
             -var "ssh_username=${{vars.SSH_USERNAME}}" \
             -var "aws_subnet_id=${{secrets.AWS_SUBNET_ID}}" \
             -var "aws_demo_account=${{secrets.AWS_DEMO_ACCOUNT}}" \
-            -var "gcp_project_id=${{secrets.GCP_PROJECT_ID}}" \
             -var "DB_HOST=${{vars.DB_HOST}}" \
             -var "DB_USER=${{secrets.DB_USER}}" \
             -var "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
