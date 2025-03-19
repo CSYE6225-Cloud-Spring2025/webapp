@@ -75,38 +75,3 @@ variable "APP_USER" {
   description = "Application user"
   default     = "csye6225"
 }
-
-variable "gcp_project_id" {
-  type        = string
-  description = "GCP project ID"
-  default     = "gcp-project-id"
-}
-
-variable "gcp_zone" {
-  type        = string
-  description = "GCP zone"
-  default     = "us-east4-a"
-}
-
-variable "gcp_image" {
-  type        = string
-  description = "GCP Ubuntu image"
-  default     = "ubuntu-2404-noble-amd64-v20250214"
-}
-
-variable "gcp_image_project" {
-  type        = string
-  description = "GCP Ubuntu image project"
-  default     = "ubuntu-os-cloud"
-}
-
-variable "gcp_machine_type" {
-  type    = string
-  default = "e2-small"
-}
-
-variable "gcp_demo_account" {
-  type        = string
-  description = "GCP demo account ID"
-  default     = "gcp-demo"
-}
