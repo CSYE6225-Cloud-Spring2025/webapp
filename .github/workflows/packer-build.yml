@@ -44,11 +44,6 @@ jobs:
             -var "ssh_username=${{vars.SSH_USERNAME}}" \
             -var "aws_subnet_id=${{secrets.AWS_SUBNET_ID}}" \
             -var "aws_demo_account=${{secrets.AWS_DEMO_ACCOUNT}}" \
-            -var "DB_HOST=${{vars.DB_HOST}}" \
-            -var "DB_USER=${{secrets.DB_USER}}" \
-            -var "DB_PASSWORD=${{secrets.DB_PASSWORD}}" \
-            -var "DB_NAME=${{vars.DB_NAME}}" \
-            -var "PORT=${{vars.PORT}}" \
             -var "APP_GROUP=${{vars.APP_GROUP}}" \
             -var "APP_USER=${{vars.APP_USER}}" \
           .

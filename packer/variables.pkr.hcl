@@ -34,36 +34,6 @@ variable "aws_demo_account" {
   default     = ""
 }
 
-variable "DB_USER" {
-  type        = string
-  description = "Database user"
-  default     = "root"
-}
-
-variable "DB_HOST" {
-  type        = string
-  description = "Database host"
-  default     = "localhost"
-}
-
-variable "DB_PASSWORD" {
-  type        = string
-  description = "Database password"
-  default     = "password"
-}
-
-variable "DB_NAME" {
-  type        = string
-  description = "Database name"
-  default     = "webapp"
-}
-
-variable "PORT" {
-  type        = string
-  description = "Application port"
-  default     = "3001"
-}
-
 variable "APP_GROUP" {
   type        = string
   description = "Application group"

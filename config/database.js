@@ -1,7 +1,7 @@
 require("dotenv").config();
 const {Sequelize} = require("sequelize");
 
-const reqEnvVars = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME"];
+const reqEnvVars = ["DB_HOST", "DB_USER", "DB_PASSWORD", "DB_NAME", "AWS_REGION", "S3_BUCKET"];
 const missingEnvVars = reqEnvVars.filter((envVar) => !process.env[envVar]);
 if (missingEnvVars.length > 0) {
   console.error(`Provide environment variables: ${missingEnvVars.join(", ")}`);

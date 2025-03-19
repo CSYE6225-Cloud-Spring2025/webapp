@@ -53,23 +53,10 @@ build {
 
   provisioner "shell" {
     script = "install-dependencies.sh"
-    environment_vars = [
-      "DB_USER=${var.DB_USER}",
-      "DB_HOST=${var.DB_HOST}",
-      "DB_PASSWORD=${var.DB_PASSWORD}",
-      "DB_NAME=${var.DB_NAME}"
-    ]
   }
 
   provisioner "shell" {
     script = "setup-directory.sh"
-    environment_vars = [
-      "DB_USER=${var.DB_USER}",
-      "DB_HOST=${var.DB_HOST}",
-      "DB_PASSWORD=${var.DB_PASSWORD}",
-      "DB_NAME=${var.DB_NAME}",
-      "PORT=${var.PORT}"
-    ]
   }
 
   provisioner "file" {

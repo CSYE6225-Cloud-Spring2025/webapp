@@ -3,15 +3,17 @@ const _ = require("lodash");
 
 const insertHealthCheck = async (req, res) => {
   try {
-    if (!_.isEmpty(req.body) || !_.isEmpty(req.query)) {
-      res.status(400).end()
+    if (req.method != "GET") {
+      res.status(405).end();
+    } else if (!_.isEmpty(req.body) || !_.isEmpty(req.query)) {
+      res.status(400).end();
     } else {
       await HealthCheck.create({});
       res.status(200).end();
     }
   } catch (error) {
     console.log("Error during insert: " + error);
-    res.status(503).end()
+    res.status(503).end();
   }
 };
 
