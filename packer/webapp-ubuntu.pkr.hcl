@@ -4,10 +4,6 @@ packer {
       source  = "github.com/hashicorp/amazon"
       version = "> 1.0.0, <2.0.0"
     }
-    googlecompute = {
-      source  = "github.com/hashicorp/googlecompute"
-      version = "> 1.0.0, <2.0.0"
-    }
   }
 }
 
@@ -40,25 +36,10 @@ source "amazon-ebs" "webapp-ubuntu" {
   }
 }
 
-# GCP image build
-source "googlecompute" "webapp-ubuntu" {
-  image_name              = local.image_name
-  image_description       = "GCP image for Assignment 4"
-  project_id              = var.gcp_project_id
-  machine_type            = var.gcp_machine_type
-  zone                    = var.gcp_zone
-  source_image            = var.gcp_image
-  source_image_project_id = [var.gcp_image_project]
-  ssh_username            = var.ssh_username
-  disk_size               = 10
-  disk_type               = "pd-ssd"
-}
-
 build {
   name = "webapp-packer"
   sources = [
-    "source.amazon-ebs.webapp-ubuntu",
-    "source.googlecompute.webapp-ubuntu"
+    "source.amazon-ebs.webapp-ubuntu"
   ]
 
   provisioner "shell" {
@@ -106,12 +87,5 @@ build {
 
   provisioner "shell" {
     script = "setup-app.sh"
-  }
-
-  post-processor "shell-local" {
-    only = ["source.googlecompute.webapp-ubuntu"]
-    inline = [
-      "gcloud compute images add-iam-policy-binding ${local.image_name} --project=${var.gcp_project_id} --member='project:${var.gcp_demo_account}' --role='roles/compute.imageUser'"
-    ]
   }
 }
