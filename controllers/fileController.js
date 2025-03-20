@@ -26,7 +26,7 @@ const fileController = async (req, res) => {
             res.status(204).end();
         }
     } catch (error) {
-        res.status(404).end();
+        res.status(503).end();
     }
 };
 
