@@ -22,7 +22,7 @@ const fileUploadController = async (req, res) => {
         const fileMetaData = await FileMetaData.create({file_name: req.file.originalname, url: s3Upload.Location});
         res.status(201).json(fileMetaData.toJSON());
     } catch (error) {
-        res.status(400).end();
+        res.status(503).end();
     }
 };
 
