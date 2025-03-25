@@ -17,9 +17,10 @@ const fileController = async (req, res) => {
         } else if (req.method == "GET"){
             res.status(200).json(fileMetaData.toJSON());
         } else if (req.method == "DELETE") {
+            const urlObject = new URL(fileMetaData.url);
             const s3Params = {
                 Bucket: process.env.S3_BUCKET,
-                Key: new URL(fileMetaData.url).pathname.substring(1)
+                Key: decodeURIComponent(urlObject.pathname.substring(1))
             };
             await s3.deleteObject(s3Params).promise();
             await fileMetaData.destroy();
