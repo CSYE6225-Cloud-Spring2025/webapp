@@ -1,0 +1,24 @@
+{
+    "agent": {
+      "metrics_collection_interval": 60,
+      "run_as_user": "csye6225"
+    },
+    "logs": {
+      "logs_collected": {
+        "files": {
+          "collect_list": [
+            {
+              "file_path": "/var/log/nodejs/webapp-error.log",
+              "log_group_name": "nodejs-webapp-logs",
+              "log_stream_name": "{instance_id}-error"
+            },
+            {
+              "file_path": "/var/log/nodejs/webapp-info.log",
+              "log_group_name": "nodejs-webapp-logs",
+              "log_stream_name": "{instance_id}-info"
+            }
+          ]
+        }
+      }
+    }
+  }
