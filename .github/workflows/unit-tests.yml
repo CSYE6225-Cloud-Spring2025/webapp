@@ -24,6 +24,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Allow write in log directory
+        run: |
+          sudo mkdir -p /var/log/nodejs
+          sudo chown $USER:$USER /var/log/nodejs
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:

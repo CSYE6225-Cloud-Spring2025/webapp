@@ -59,11 +59,6 @@ build {
     script = "setup-directory.sh"
   }
 
-  provisioner "file" {
-    source      = "webapp.service"
-    destination = "/tmp/webapp.service"
-  }
-
   provisioner "shell" {
     script = "setup-user.sh"
     environment_vars = [

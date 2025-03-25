@@ -3,6 +3,7 @@ const multer = require("multer");
 const healthCheckController = require("../controllers/healthCheckController");
 const fileController = require("../controllers/fileController");
 const fileUploadController = require("../controllers/fileUploadController");
+const {infoLogger} = require("../logger");
 
 const router = express.Router();
 const upload = multer({
@@ -15,7 +16,8 @@ router.all("/healthz", healthCheckController);
 router.post("/v1/file", upload.single("file"), fileUploadController);
 router.all("/v1/file/:id", fileController);
 
-router.use((_req, res) => {
+router.use((req, res) => {
+    infoLogger.warn(`Invalid request to ${req.originalUrl}`);
     res.status(400).end();
 });
 

@@ -10,6 +10,9 @@ sudo mkdir -p /opt/csye6225/webapp
 sudo chmod -R 755 /opt/csye6225/webapp
 sudo cp -R /tmp/webapp/* /opt/csye6225/webapp/
 
+# create directory for logs
+sudo mkdir -p /var/log/nodejs
+
 # install node modules
 cd /opt/csye6225/webapp || exit
 sudo npm install
