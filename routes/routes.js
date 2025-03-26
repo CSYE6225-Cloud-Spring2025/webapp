@@ -13,13 +13,13 @@ const upload = multer({
 });
 
 router.use((req, res, next) => {
-    statsd.increment(`api.calls.${req.method}-${req.path}`);
+    statsd.increment(`api.calls.${req.method} ${req.baseUrl}`);
 
     const originalEnd = res.end;
     const startTime = Date.now();
     res.end = function(...args) {
         const endTime = Date.now() - startTime;
-        statsd.timing(`api.response_time.${req.method}-${req.path}`, endTime);
+        statsd.timing(`api.response_time.${req.method} ${req.baseUrl}`, endTime);
         return originalEnd.apply(this, args);
     };
     next();

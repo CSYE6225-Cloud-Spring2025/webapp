@@ -37,7 +37,7 @@ const fileController = async (req, res) => {
             infoLogger.info(`Deleting file ID: ${req.params.id} with S3: ${s3Params.Key}`);
             const s3StartTime = Date.now();
             await s3.deleteObject(s3Params).promise();
-            statsd.timing('s3.delete.time', Date.now() - s3StartTime);
+            statsd.timing('file.delete.time', Date.now() - s3StartTime);
             infoLogger.info(`File delete successful for S3: ${s3Params.Key}`);
 
             const dbStartTime = Date.now();
