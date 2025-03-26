@@ -10,4 +10,5 @@ sudo apt install nodejs -y
 sudo apt install npm -y
 
 # install CloudWatch agent
-sudo apt install amazon-cloudwatch-agent -y
+wget https://amazoncloudwatch-agent.s3.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
