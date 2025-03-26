@@ -26,7 +26,7 @@ const fileUploadController = async (req, res) => {
         };
         const s3StartTime = Date.now();
         const s3Upload = await s3.upload(s3Params).promise();
-        statsd.timing('s3.upload.time', Date.now() - s3StartTime);
+        statsd.timing('file.upload.time', Date.now() - s3StartTime);
         infoLogger.info(`File upload successful: ${s3Upload.Location}`);
 
         const dbStartTime = Date.now();
