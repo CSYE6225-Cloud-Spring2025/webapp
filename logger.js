@@ -5,7 +5,7 @@ log4js.configure({
     errorLogs: {type:"file", filename:"/var/log/nodejs/webapp-error.log", maxLogSize:10485760, backups:3, compress:false, 
       layout: {
         type: "pattern",
-        pattern: '{"timestamp":"%d{ISO8601}","level":"%p","category":"%c","message":"%m"}'
+        pattern: '{"timestamp":"%d{ISO8601}","level":"%p","category":"%c","message":"%m","error":"%j"}'
       }
     },
     infoLogs: {type:"file", filename:"/var/log/nodejs/webapp-info.log", maxLogSize:10485760, backups:3, compress:false, 
