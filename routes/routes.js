@@ -4,6 +4,7 @@ const healthCheckController = require("../controllers/healthCheckController");
 const fileController = require("../controllers/fileController");
 const fileUploadController = require("../controllers/fileUploadController");
 const {infoLogger} = require("../logger");
+const statsd = require('../config/statsd');
 
 const router = express.Router();
 const upload = multer({
@@ -11,8 +12,20 @@ const upload = multer({
     limits: {fileSize: 500*1024*1024} // limit file size to 500 MB
 });
 
-router.all("/healthz", healthCheckController);
+router.use((req, res, next) => {
+    statsd.increment(`api.calls.${req.method}-${req.path}`);
 
+    const originalEnd = res.end;
+    const startTime = Date.now();
+    res.end = function(...args) {
+        const endTime = Date.now() - startTime;
+        statsd.timing(`api.response_time.${req.method}-${req.path}`, endTime);
+        return originalEnd.apply(this, args);
+    };
+    next();
+});
+
+router.all("/healthz", healthCheckController);
 router.post("/v1/file", upload.single("file"), fileUploadController);
 router.all("/v1/file/:id", fileController);
 
