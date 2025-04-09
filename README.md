@@ -20,3 +20,8 @@
 4. Start instance creation and select the custom image shared from the dev account
 5. Configure the <network-tag> in the instance's target tag
 6. Finally create the instance and get its public ipv4 address to send requests
+
+## Assignment 8
+1. Configure the `demo` account credentials in GitHub secrets along with template and auto-scaling group names
+2. Create the infrastructure using `terraform apply` in demo account
+3. Merge a PR to trigger the auto-scaling group refresh with latest AMI
