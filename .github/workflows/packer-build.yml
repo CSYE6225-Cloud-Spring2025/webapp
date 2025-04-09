@@ -47,8 +47,46 @@ jobs:
             -var "APP_GROUP=${{vars.APP_GROUP}}" \
             -var "APP_USER=${{vars.APP_USER}}" \
           .
+          
+          
+          # AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d: -f2)
+          # echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
 
-          AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d: -f2)
+          # Debug - list directory contents to find manifest file
+          echo "Contents of packer directory:"
+          ls -la
+          
+          # Check if manifest.json exists and display its content
+          if [ -f "manifest.json" ]; then
+            echo "Found manifest.json, contents:"
+            cat manifest.json
+            
+            # Extract AMI ID from manifest.json
+            AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
+            echo "Extracted AMI_ID: $AMI_ID"
+          else
+            # Try to find manifest file in a different location
+            MANIFEST_FILE=$(find . -name "manifest.json" | head -1)
+            if [ -n "$MANIFEST_FILE" ]; then
+              echo "Found manifest at $MANIFEST_FILE, contents:"
+              cat "$MANIFEST_FILE"
+              
+              # Extract AMI ID from found manifest file
+              AMI_ID=$(jq -r '.builds[-1].artifact_id' "$MANIFEST_FILE" | cut -d ":" -f2)
+              echo "Extracted AMI_ID: $AMI_ID"
+            else
+              echo "Error: Cannot find manifest.json file"
+              exit 1
+            fi
+          fi
+          
+          # Validate AMI ID format
+          if [[ ! "$AMI_ID" =~ ^ami-[a-z0-9]+$ ]]; then
+            echo "Error: Invalid AMI ID format: $AMI_ID"
+            exit 1
+          fi
+          
+          # Set the environment variable for subsequent steps
           echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
 
       - name: Switch to demo account
@@ -63,15 +101,6 @@ jobs:
           LAUNCH_TEMPLATE_ID=$(aws ec2 describe-launch-templates --filters "Name=launch-template-name,Values=${{vars.LAUNCH_TEMPLATE_NAME}}" \
             --query "LaunchTemplates[0].LaunchTemplateId" --output text)
             
-          # Validate that we got a proper launch template ID
-          if [ -z "$LAUNCH_TEMPLATE_ID" ] || [ "$LAUNCH_TEMPLATE_ID" = "None" ]; then
-            echo "Error: Could not find launch template with name ${{vars.LAUNCH_TEMPLATE_NAME}}"
-            echo "Available launch templates:"
-            aws ec2 describe-launch-templates --query "LaunchTemplates[*].[LaunchTemplateId,LaunchTemplateName]" --output table
-            exit 1
-          fi
-
-          echo "Found launch template: $LAUNCH_TEMPLATE_ID"
           echo "LAUNCH_TEMPLATE_ID=$LAUNCH_TEMPLATE_ID" >> $GITHUB_ENV
 
       - name: Create a new version of the launch template with AMI
