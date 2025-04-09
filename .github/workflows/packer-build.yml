@@ -46,47 +46,23 @@ jobs:
             -var "aws_demo_account=${{secrets.AWS_DEMO_ACCOUNT}}" \
             -var "APP_GROUP=${{vars.APP_GROUP}}" \
             -var "APP_USER=${{vars.APP_USER}}" \
-          .
+          . | tee packer-build-output.log
           
-          
-          # AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d: -f2)
-          # echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
-
-          # Debug - list directory contents to find manifest file
+          # Debug - list directory contents
           echo "Contents of packer directory:"
           ls -la
           
-          # Check if manifest.json exists and display its content
-          if [ -f "manifest.json" ]; then
-            echo "Found manifest.json, contents:"
-            cat manifest.json
-            
-            # Extract AMI ID from manifest.json
-            AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
-            echo "Extracted AMI_ID: $AMI_ID"
-          else
-            # Try to find manifest file in a different location
-            MANIFEST_FILE=$(find . -name "manifest.json" | head -1)
-            if [ -n "$MANIFEST_FILE" ]; then
-              echo "Found manifest at $MANIFEST_FILE, contents:"
-              cat "$MANIFEST_FILE"
-              
-              # Extract AMI ID from found manifest file
-              AMI_ID=$(jq -r '.builds[-1].artifact_id' "$MANIFEST_FILE" | cut -d ":" -f2)
-              echo "Extracted AMI_ID: $AMI_ID"
-            else
-              echo "Error: Cannot find manifest.json file"
-              exit 1
-            fi
-          fi
+          # Extract the AMI ID from the Packer build output
+          AMI_ID=$(grep -oP 'ami-[a-z0-9]+' packer-build-output.log | tail -1)
           
-          # Validate AMI ID format
-          if [[ ! "$AMI_ID" =~ ^ami-[a-z0-9]+$ ]]; then
-            echo "Error: Invalid AMI ID format: $AMI_ID"
+          if [ -z "$AMI_ID" ]; then
+            echo "Failed to extract AMI ID from Packer output"
+            echo "Last 20 lines of Packer output:"
+            tail -20 packer-build-output.log
             exit 1
           fi
           
-          # Set the environment variable for subsequent steps
+          echo "Extracted AMI_ID: $AMI_ID"
           echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
 
       - name: Switch to demo account
