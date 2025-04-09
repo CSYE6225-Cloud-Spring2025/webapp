@@ -1,7 +1,7 @@
 name: Packer build and create machine image
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -48,21 +48,7 @@ jobs:
             -var "APP_USER=${{vars.APP_USER}}" \
           . | tee packer-build-output.log
           
-          # Debug - list directory contents
-          echo "Contents of packer directory:"
-          ls -la
-          
-          # Extract the AMI ID from the Packer build output
           AMI_ID=$(grep -oP 'ami-[a-z0-9]+' packer-build-output.log | tail -1)
-          
-          if [ -z "$AMI_ID" ]; then
-            echo "Failed to extract AMI ID from Packer output"
-            echo "Last 20 lines of Packer output:"
-            tail -20 packer-build-output.log
-            exit 1
-          fi
-          
-          echo "Extracted AMI_ID: $AMI_ID"
           echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
 
       - name: Switch to demo account
@@ -91,7 +77,7 @@ jobs:
       - name: Refresh auto-scaling group instance
         run: |
           ASG_REFRESH_ID=$(aws autoscaling start-instance-refresh --auto-scaling-group-name ${{vars.AUTOSCALING_GROUP_NAME}} \
-            --query "InstanceRefreshId" --preferences '{"MinHealthyPercentage": 30, "InstanceWarmup": 300}' --output text)
+            --query "InstanceRefreshId" --preferences '{"MinHealthyPercentage": 20, "InstanceWarmup": 60}' --output text)
             
           echo "Started instance refresh with ID: $ASG_REFRESH_ID"
           echo "ASG_REFRESH_ID=$ASG_REFRESH_ID" >> $GITHUB_ENV
@@ -110,7 +96,7 @@ jobs:
             elif [ "$REFRESH_STATUS" = "InProgress" ] || [ "$REFRESH_STATUS" = "Pending" ]
             then
               echo "Auto-scaling group instance refresh still in progress..."
-              sleep 45
+              sleep 60
             else
               echo "Refresh auto-scaling group with new template failed: $REFRESH_STATUS"
               exit 1
