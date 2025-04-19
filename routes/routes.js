@@ -29,6 +29,7 @@ router.use((req, res, next) => {
 router.all("/healthz", healthCheckController);
 router.post("/v1/file", upload.single("file"), fileUploadController);
 router.all("/v1/file/:id", fileController);
+router.all("/cicd", healthCheckController);
 
 router.use((req, res) => {
     infoLogger.warn(`Invalid request to ${req.originalUrl}`);
